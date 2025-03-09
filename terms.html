@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Terms & Conditions - ShopWave</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #4a6de5;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        main {
+            padding: 50px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeIn 1s ease-out;
+        }
+        h1, h2 {
+            color: #4a6de5;
+        }
+        p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .terms-section {
+            margin-bottom: 40px;
+        }
+        .accordion {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .accordion-header {
+            padding: 20px;
+            font-weight: bold;
+            background-color: #4a6de5;
+            color: white;
+            cursor: pointer;
+        }
+        .accordion-content {
+            padding: 20px;
+            display: none;
+        }
+        .accordion.active .accordion-content {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Terms & Conditions</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="terms-section">
+            <h2>Introduction</h2>
+            <p>Welcome to ShopWave. By accessing our website, you agree to be bound by these terms and conditions...</p>
+        </section>
+        
+        <section class="terms-section">
+            <div class="accordion">
+                <div class="accordion-header">Use of Our Service</div>
+                <div class="accordion-content">
+                    <p>You must use our website in accordance with these terms. You agree not to misuse our services...</p>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion-header">Privacy Policy</div>
+                <div class="accordion-content">
+                    <p>Your privacy is important to us. Our Privacy Policy explains how we handle your data...</p>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion-header">Intellectual Property</div>
+                <div class="accordion-content">
+                    <p>All content on our website, including text, graphics, and logos, is the property of ShopWave...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 ShopWave | All Rights Reserved</p>
+    </footer>
+    <script>
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const parent = header.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

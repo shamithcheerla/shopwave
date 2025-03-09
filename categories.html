@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Product Categories - ShopWave</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #4a6de5;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 50px;
+      background-color: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      animation: fadeIn 1s ease-out;
+    }
+    .categories-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .category-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+      padding: 10px;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    .category-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .category-card h3 {
+      padding: 15px 0;
+      margin: 0;
+      background-color: #4a6de5;
+      color: white;
+    }
+    .category-card:hover {
+      transform: translateY(-10px);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Staggered animation delays */
+    .category-card:nth-child(1) { animation-delay: 0.2s; }
+    .category-card:nth-child(2) { animation-delay: 0.4s; }
+    .category-card:nth-child(3) { animation-delay: 0.6s; }
+    .category-card:nth-child(4) { animation-delay: 0.8s; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Product Categories</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="categories-container">
+      <div class="category-card" onclick="window.location.href='products.html?cat=electronics'">
+        <img src="electronics.jpg" alt="Electronics">
+        <h3>Electronics</h3>
+      </div>
+      <div class="category-card" onclick="window.location.href='products.html?cat=fashion'">
+        <img src="fashion.jpg" alt="Fashion">
+        <h3>Fashion</h3>
+      </div>
+      <div class="category-card" onclick="window.location.href='products.html?cat=home'">
+        <img src="home.jpg" alt="Home & Kitchen">
+        <h3>Home & Kitchen</h3>
+      </div>
+      <div class="category-card" onclick="window.location.href='products.html?cat=beauty'">
+        <img src="beauty.jpg" alt="Beauty">
+        <h3>Beauty</h3>
+      </div>
+      <!-- Add more category cards here as needed -->
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 ShopWave | All Rights Reserved</p>
+  </footer>
+</body>
+</html>

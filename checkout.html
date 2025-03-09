@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - ShopWave</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #4a6de5;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-out;
+    }
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    @media (max-width: 768px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .checkout-section {
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      color: #4a6de5;
+      margin-top: 0;
+      border-bottom: 2px solid #4a6de5;
+      padding-bottom: 10px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .order-summary {
+      margin-top: 20px;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border-top: 2px solid #4a6de5;
+      margin-top: 20px;
+    }
+    .place-order-btn {
+      display: block;
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    .place-order-btn:hover {
+      background-color: #218838;
+    }
+    .back-to-cart {
+      display: inline-block;
+      margin-top: 20px;
+      color: #4a6de5;
+      text-decoration: none;
+    }
+    .back-to-cart:hover {
+      text-decoration: underline;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .payment-icons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .payment-icons span {
+      display: inline-block;
+      padding: 8px 15px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Checkout</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <form id="checkout-form">
+      <div class="checkout-container">
+        <div class="checkout-section">
+          <h2>Shipping Information</h2>
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Street Address</label>
+            <input type="text" id="address" name="address" required>
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+          <div class="form-group">
+            <label for="state">State/Province</label>
+            <input type="text" id="state" name="state" required>
+          </div>
+          <div class="form-group">
+            <label for="zipCode">Zip/Postal Code</label>
+            <input type="text" id="zipCode" name="zipCode" required>
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" name="country" required>
+              <option value="">Select a country</option>
+              <option value="IND">India</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="UK">United Kingdom</option>
+              <option value="AU">Australia</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="JP">Japan</option>
+            </select>
+          </div>
+        </div>
+        <div class="checkout-section">
+          <h2>Payment Details</h2>
+          <div class="form-group">
+            <label for="cardName">Name on Card</label>
+            <input type="text" id="cardName" name="cardName" required>
+          </div>
+          <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX" required>
+          </div>
+          <div class="form-group" style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+              <label for="expDate">Expiration Date</label>
+              <input type="text" id="expDate" name="expDate" placeholder="MM/YY" required>
+            </div>
+            <div style="flex: 1;">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" name="cvv" placeholder="XXX" required>
+            </div>
+          </div>
+          <div class="payment-icons">
+            <span>Visa</span>
+            <span>Mastercard</span>
+            <span>Amex</span>
+            <span>PayPal</span>
+          </div>
+          
+          <h2>Order Summary</h2>
+          <div class="order-summary" id="order-summary">
+            <!-- Order items will be populated here -->
+          </div>
+          <div class="order-total">
+            <span>Total:</span>
+            <span id="order-total-amount">$0.00</span>
+          </div>
+          
+          <button type="submit" class="place-order-btn">Place Order</button>
+          <a href="cart.html" class="back-to-cart">&larr; Back to Cart</a>
+        </div>
+      </div>
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2025 ShopWave | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Load cart from localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const orderSummary = document.getElementById('order-summary');
+    const orderTotalAmount = document.getElementById('order-total-amount');
+    
+    // Redirect to cart if cart is empty
+    if (cart.length === 0) {
+      alert('Your cart is empty. Please add items before checkout.');
+      window.location.href = 'cart.html';
+    }
+    
+    // Render order summary
+    function renderOrderSummary() {
+      orderSummary.innerHTML = '';
+      let total = 0;
+      
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item';
+        orderItem.innerHTML = `
+          <span>${item.name} × ${item.quantity}</span>
+          <span>$${itemTotal.toFixed(2)}</span>
+        `;
+        orderSummary.appendChild(orderItem);
+      });
+      
+      orderTotalAmount.textContent = '$' + total.toFixed(2);
+    }
+    
+    // Submit handler
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Basic validation
+      const requiredFields = ['fullName', 'email', 'address', 'city', 'state', 'zipCode', 'country', 'cardName', 'cardNumber', 'expDate', 'cvv'];
+      let isValid = true;
+      
+      requiredFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (!input.value.trim()) {
+          input.style.borderColor = 'red';
+          isValid = false;
+        } else {
+          input.style.borderColor = '#ddd';
+        }
+      });
+      
+      if (!isValid) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+      
+      // Simulate order processing
+      alert('Thank you for your order! Order #' + Math.floor(Math.random() * 1000000) + ' has been placed successfully.');
+      
+      // Clear cart and redirect to confirmation page
+      localStorage.removeItem('cart');
+      
+      // In a real application, you'd redirect to an order confirmation page
+      // For this example, we'll just go back to the homepage
+      window.location.href = 'index.html';
+    });
+    
+    // Initialize
+    renderOrderSummary();
+  </script>
+</body>
+</html>

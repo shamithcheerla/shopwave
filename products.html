@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - ShopWave</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #4a6de5;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-out;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: white;
+    }
+    .product-image img {
+      width: 100%;
+      height: auto;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .product-title {
+      font-size: 1.2rem;
+      margin: 0 0 10px;
+    }
+    .product-price {
+      font-size: 1.1rem;
+      color: #4a6de5;
+    }
+    .product-price .old-price {
+      text-decoration: line-through;
+      color: #999;
+      margin-left: 10px;
+    }
+    .add-to-cart {
+      background-color: #4a6de5;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .add-to-cart:hover {
+      background-color: #3857d0;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 1000;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    }
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100vh;
+      background-color: white;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-panel.active {
+      right: 0;
+    }
+    .cart-header {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-header h3 {
+      margin: 0;
+    }
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .cart-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+    }
+    .cart-item {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      margin-right: 15px;
+    }
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cart-item-details {
+      flex: 1;
+    }
+    .cart-item-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .cart-item-price {
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+    }
+    .quantity-btn {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .quantity-input {
+      width: 40px;
+      height: 25px;
+      text-align: center;
+      border: 1px solid #ddd;
+      margin: 0 5px;
+    }
+    .cart-item-remove {
+      color: #dc3545;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .cart-footer {
+      padding: 15px;
+      border-top: 1px solid #eee;
+    }
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .cart-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+    .clear-cart, .checkout {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    .clear-cart {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    .checkout {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .empty-cart-message {
+      text-align: center;
+      margin-top: 50px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h1>ShopWave</h1>
+      </div>
+      <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="login.html" title="Login/Register"><i class="fas fa-user"></i></a>
+        <a href="cart.html" title="Shopping Cart"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+      </div>
+    </nav>
+    <h1>Products</h1>
+  </header>
+  <main>
+    <div class="products-grid" id="products-container"></div>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Shop<span>Wave</span></h3>
+        <p>Your ultimate shopping destination for quality products and exceptional service.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="shipping.html">Shipping Policy</a></li>
+          <li><a href="returns.html">Returns & Refunds</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Shopping Ave, Retail City</li>
+          <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+          <li><i class="fas fa-envelope"></i> support@shopwave.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 ShopWave. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (mobileMenu) {
+      mobileMenu.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        // Toggle bar animations
+        const bars = this.querySelectorAll('.bar');
+        if (this.classList.contains('active')) {
+          bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+          bars[1].style.opacity = '0';
+          bars[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+        } else {
+          bars[0].style.transform = 'none';
+          bars[1].style.opacity = '1';
+          bars[2].style.transform = 'none';
+        }
+      });
+    }
+
+    // Close mobile menu when clicking on a menu item
+    document.querySelectorAll('.nav-menu a').forEach(item => {
+      item.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+          const bars = mobileMenu.querySelectorAll('.bar');
+          bars[0].style.transform = 'none';
+          bars[1].style.opacity = '1';
+          bars[2].style.transform = 'none';
+        }
+      });
+    });
+
+    // Sample product data (in a real app, this would come from a database or API)
+    const products = [
+        {
+            id: 1,
+            title: "Wireless Bluetooth Headphones",
+            category: "Electronics",
+            price: 79.99,
+            oldPrice: 99.99,
+            discountPercentage: 20,
+            image: "buds.jpg",
+            rating: 4.5,
+            featured: true
+        },
+        {
+            id: 2,
+            title: "Smart Fitness Tracker",
+            category: "Electronics",
+            price: 49.99,
+            oldPrice: 69.99,
+            discountPercentage: 29,
+            image: "watch.jpg",
+            rating: 4.3,
+            featured: true
+        },
+        {
+            id: 3,
+            title: "Premium Cotton T-Shirt",
+            category: "Fashion",
+            price: 24.99,
+            oldPrice: 29.99,
+            discountPercentage: 17,
+            image: "cottontshirt.jpg",
+            rating: 4.8,
+            featured: true
+        },
+        {
+            id: 4,
+            title: "Stainless Steel Water Bottle",
+            category: "Home & Kitchen",
+            price: 19.99,
+            oldPrice: 29.99,
+            discountPercentage: 33,
+            image: "bottle.jpg",
+            rating: 4.7,
+            featured: true
+        },
+        {
+            id: 5,
+            title: "Organic Face Moisturizer",
+            category: "Beauty",
+            price: 34.99,
+            oldPrice: 44.99,
+            discountPercentage: 22,
+            image: "face.jpg",
+            rating: 4.6,
+            featured: false
+        },
+        {
+            id: 6,
+            title: "Wireless Charging Pad",
+            category: "Electronics",
+            price: 29.99,
+            oldPrice: 39.99,
+            discountPercentage: 25,
+            image: "charging.jpg",
+            rating: 4.4,
+            featured: false
+        },
+        {
+            id: 7,
+            title: "Apple macbook",
+            category: "Fashion",
+            price: 39.99,
+            oldPrice: 49.99,
+            discountPercentage: 20,
+            image: "mac.jpg",
+            rating: 4.5,
+            featured: false
+        },
+        {
+            id: 8,
+            title: "Smart LED Bulb",
+            category: "Home & Kitchen",
+            price: 15.99,
+            oldPrice: 19.99,
+            discountPercentage: 20,
+            image: "led.jpg",
+            rating: 4.2,
+            featured: true
+        }
+    ];
+
+    // Preload product images to ensure they're ready before display
+    function preloadImages() {
+        products.forEach(product => {
+            const img = new Image();
+            img.src = product.image;
+        });
+    }
+
+    // Function to generate product HTML with improved image handling
+    function generateProductHTML(product) {
+        // Generate star rating
+        let starsHTML = '';
+        const fullStars = Math.floor(product.rating);
+        const hasHalfStar = product.rating % 1 !== 0;
+
+        for (let i = 0; i < fullStars; i++) {
+            starsHTML += '<i class="fas fa-star"></i>';
+        }
+
+        if (hasHalfStar) {
+            starsHTML += '<i class="fas fa-star-half-alt"></i>';
+        }
+
+        // Calculate remaining empty stars
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        for (let i = 0; i < emptyStars; i++) {
+            starsHTML += '<i class="far fa-star"></i>';
+        }
+
+        return `
+            <div class="product-card" data-id="${product.id}">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.title}" onerror="this.onerror=null;this.src='/api/placeholder/250/250';">
+                    ${product.discountPercentage ? `<span class="discount-tag">-${product.discountPercentage}%</span>` : ''}
+                    <div class="product-actions">
+                        <button class="action-btn" title="Add to Wishlist">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="action-btn" title="Quick View">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Compare">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${product.category}</div>
+                    <h3 class="product-title">${product.title}</h3>
+                    <div class="rating">
+                        ${starsHTML}
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">$${product.price.toFixed(2)}</span>
+                        ${product.oldPrice ? `<span class="old-price">$${product.oldPrice.toFixed(2)}</span>` : ''}
+                    </div>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Add to Cart Functionality
+    function addToCart(e) {
+        e.preventDefault();
+        const productCard = this.closest('.product-card');
+        const productId = parseInt(productCard.dataset.id);
+        const productTitle = productCard.querySelector('.product-title').textContent;
+
+        // Show toast notification
+        showToast(`Added "${productTitle}" to cart!`);
+
+        // Update cart count
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+            let count = parseInt(cartCount.textContent || "0");
+            cartCount.textContent = count + 1;
+        }
+
+        // In a real application, you would add the product to a cart object
+        // and possibly save it to localStorage or send to a backend
+        console.log(`Added product ID ${productId} to cart`);
+
+        // Update cart object
+        cart.addItem(productId);
+
+        // Update cart display if it's open
+        updateCartPanel();
+    }
+
+    // Attach event listeners for cart functionality
+    function attachCartEventListeners() {
+        // Add event listeners to add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
+
+        // Add event listeners to wishlist buttons
+        document.querySelectorAll('.action-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (this.title === "Add to Wishlist") {
+                    toggleWishlist(this);
+                } else if (this.title === "Quick View") {
+                    showQuickView(this);
+                }
+            });
+        });
+    }
+
+    // Wishlist Functionality
+    function toggleWishlist(button) {
+        const icon = button.querySelector('i');
+
+        if (icon.classList.contains('far')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            icon.style.color = '#dc3545';
+            showToast("Added to your wishlist!");
+        } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            icon.style.color = '';
+            showToast("Removed from your wishlist!");
+        }
+    }
+
+    // Quick View Functionality
+    function showQuickView(button) {
+        const productCard = button.closest('.product-card');
+        const productId = productCard.dataset.id;
+        const product = products.find(p => p.id === parseInt(productId));
+
+        alert(`Quick view for ${product.title} - $${product.price}\nFeature coming soon!`);
+    }
+
+    // Toast Notification System
+    function showToast(message) {
+        // Create toast element if it doesn't exist
+        let toast = document.querySelector('.toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'toast';
+            document.body.appendChild(toast);
+
+            // Add styles for toast if not already in CSS
+            if (!document.querySelector('style#toast-style')) {
+                const style = document.createElement('style');
+                style.id = 'toast-style';
+                style.textContent = `
+                    .toast {
+                        position: fixed;
+                        bottom: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background-color: #333;
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 4px;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: opacity 0.3s, visibility 0.3s;
+                        z-index: 1000;
+                        box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+                    }
+                    .toast.show {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Set message and show toast
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        // Hide after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // Newsletter Subscription
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+
+            // In a real application, you would send this to a backend
+            console.log(`Newsletter subscription for: ${email}`);
+
+            // Show success message
+            showToast("Thanks for subscribing to our newsletter!");
+
+            // Reset form
+            this.reset();
+        });
+    }
+
+    // Cart object for managing shopping cart
+    const cart = {
+        items: [],
+
+        addItem: function(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                console.error(`Product with ID ${productId} not found`);
+                return;
+            }
+
+            console.log("Adding product to cart:", product);
+
+            const existingItem = this.items.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                this.items.push({
+                    id: productId,
+                    title: product.title,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+
+            console.log("Cart contents after adding:", this.items);
+            this.saveCart();
+        },
+
+        removeItem: function(productId) {
+            this.items = this.items.filter(item => item.id !== productId);
+            this.saveCart();
+            updateCartPanel();
+        },
+
+        updateQuantity: function(productId, quantity) {
+            const item = this.items.find(item => item.id === productId);
+            if (item) {
+                item.quantity = quantity;
+                this.saveCart();
+                updateCartPanel();
+            }
+        },
+
+        getTotal: function() {
+            return this.items.reduce((total, item) => {
+                return total + (item.price * item.quantity);
+            }, 0);
+        },
+
+        getItemCount: function() {
+            return this.items.reduce((count, item) => {
+                return count + item.quantity;
+            }, 0);
+        },
+
+        saveCart: function() {
+            localStorage.setItem('cart', JSON.stringify(this.items));
+            this.updateCartUI();
+        },
+
+        loadCart: function() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                try {
+                    this.items = JSON.parse(savedCart);
+                    console.log("Loaded cart from storage:", this.items);
+                    this.updateCartUI();
+                } catch (e) {
+                    console.error("Error loading cart from storage:", e);
+                }
+            }
+        },
+
+        updateCartUI: function() {
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                cartCount.textContent = this.getItemCount();
+            }
+        }
+    };
+
+    // Preload images and generate product HTML
+    preloadImages();
+    const productsContainer = document.getElementById('products-container');
+    productsContainer.innerHTML = products.map(generateProductHTML).join('');
+
+    // Attach event listeners for cart functionality
+    attachCartEventListeners();
+
+    // Load cart from storage on page load
+    cart.loadCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Returns & Refunds - ShopWave</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #4a6de5;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        main {
+            padding: 50px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeIn 1s ease-out;
+        }
+        h1, h2 {
+            color: #4a6de5;
+        }
+        p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .returns-policy {
+            margin-bottom: 40px;
+        }
+        .returns-form {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4a6de5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3857d0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Returns & Refunds</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="returns-policy">
+            <h2>Our Return Policy</h2>
+            <p>At ShopWave, we offer a 30-day return policy. If you are not completely satisfied with your purchase, you can request a return or refund.</p>
+            <p>To be eligible for a return, items must be unused, in their original packaging, and accompanied by the receipt or proof of purchase.</p>
+        </section>
+        <section class="returns-form">
+            <h2>Request a Return or Refund</h2>
+            <form id="return-form">
+                <label for="order-number">Order Number:</label>
+                <input type="text" id="order-number" name="order-number" placeholder="Enter your order number" required>
+
+                <label for="reason">Reason for Return:</label>
+                <select id="reason" name="reason" required>
+                    <option value="damaged">Item arrived damaged</option>
+                    <option value="incorrect">Incorrect item received</option>
+                    <option value="quality">Product quality issue</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="details">Additional Details:</label>
+                <textarea id="details" name="details" rows="5" placeholder="Provide any additional information"></textarea>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 ShopWave | All Rights Reserved</p>
+    </footer>
+    <script>
+        document.getElementById('return-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Your return request has been submitted. Our team will contact you shortly.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

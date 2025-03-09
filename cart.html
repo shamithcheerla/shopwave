@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - ShopWave</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #4a6de5;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-out;
+    }
+    .cart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 20px;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .cart-item img {
+      width: 100%;
+      max-width: 120px;
+      height: auto;
+      border-radius: 10px;
+    }
+    .cart-item-details h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+    .cart-item-details p {
+      margin: 5px 0;
+      color: #4a6de5;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .quantity-controls button {
+      background-color: #4a6de5;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .quantity-controls button:hover {
+      background-color: #3857d0;
+    }
+    .quantity-controls span {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .remove-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .remove-btn:hover {
+      background-color: #c82333;
+    }
+    .cart-summary {
+      text-align: right;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .checkout-btn {
+      display: inline-block;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+    .checkout-btn:hover {
+      background-color: #218838;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <h1>ShopWave</h1>
+      </div>
+      <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="login.html" title="Login/Register"><i class="fas fa-user"></i></a>
+        <a href="cart.html" title="Shopping Cart"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+      </div>
+    </nav>
+    <h1>Shopping Cart</h1>
+  </header>
+  <main>
+    <div class="cart-container" id="cart-container">
+      <p>Your cart is currently empty.</p>
+    </div>
+    <div class="cart-summary" id="cart-summary"></div>
+    <div style="text-align: right;">
+      <a href="checkout.html" class="checkout-btn" id="checkout-btn">Proceed to Checkout</a>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Shop<span>Wave</span></h3>
+        <p>Your ultimate shopping destination for quality products and exceptional service.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="categories.html">Categories</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Customer Service</h3>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="shipping.html">Shipping Policy</a></li>
+          <li><a href="returns.html">Returns & Refunds</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 123 Shopping Ave, Retail City</li>
+          <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+          <li><i class="fas fa-envelope"></i> support@shopwave.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 ShopWave. All Rights Reserved.
+          MADE BY CHEERLA SHAMITH
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+        const container = document.getElementById('cart-container');
+        const totalElement = document.getElementById('cart-summary');
+        let total = 0;
+
+        if (cart.length === 0) {
+            container.innerHTML = '<p>Your cart is currently empty.</p>';
+            totalElement.innerHTML = '';
+            updateCartCount();
+            return;
+        }
+
+        container.innerHTML = cart.map(item => {
+            total += item.price * item.quantity;
+            return `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="cart-item-details">
+                        <h3>${item.title}</h3>
+                        <p>$${item.price} x ${item.quantity}</p>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        totalElement.innerHTML = `Total: $${total.toFixed(2)}`;
+        updateCartCount();
+    }
+
+    function updateQuantity(productId, quantity) {
+        if (quantity < 1) return;
+        const item = cart.find(item => item.id === productId);
+        if (item) {
+            item.quantity = quantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+    }
+
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+    }
+
+    function updateCartCount() {
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+            cartCount.textContent = cart.reduce((count, item) => count + item.quantity, 0);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+</body>
+</html>

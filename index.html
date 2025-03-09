@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopWave - Modern E-Commerce</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Shop<span>Wave</span></h1>
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="login.html" title="Login/Register"><i class="fas fa-user"></i></a>
+                <a href="cart.html" title="Shopping Cart"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Shop the Latest Trends</h2>
+                <p>Discover amazing products with unbeatable prices and exceptional quality</p>
+                <div class="hero-buttons">
+                    <a href="products.html" class="btn primary-btn">Shop Now</a>
+                    <a href="#featured" class="btn secondary-btn">Explore</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Categories -->
+        <section id="featured" class="featured-categories">
+            <div class="section-header">
+                <h2>Featured Categories</h2>
+                <p>Browse our top categories curated just for you</p>
+            </div>
+            <div class="category-container">
+                <div class="category-card">
+                    <img src="electronics.jpg" alt="Electronics">
+                    <h3>Electronics</h3>
+                    <a href="categories.html?cat=electronics" class="category-link">View Products</a>
+                </div>
+                <div class="category-card">
+                    <img src="fashion.jpg" alt="Fashion">
+                    <h3>Fashion</h3>
+                    <a href="categories.html?cat=fashion" class="category-link">View Products</a>
+                </div>
+                <div class="category-card">
+                    <img src="home.jpg" alt="Home & Kitchen">
+                    <h3>Home & Kitchen</h3>
+                    <a href="categories.html?cat=home" class="category-link">View Products</a>
+                </div>
+                <div class="category-card">
+                    <img src="beauty.jpg" alt="Beauty">
+                    <h3>Beauty</h3>
+                    <a href="categories.html?cat=beauty" class="category-link">View Products</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Hand-picked products that our customers love</p>
+            </div>
+            <div class="product-container" id="featured-products">
+                <!-- Products will be loaded from JavaScript -->
+            </div>
+            <div class="center-btn">
+                <a href="products.html" class="btn primary-btn">View All Products</a>
+            </div>
+        </section>
+        
+        <!-- Special Offer -->
+        <section class="special-offer">
+            <div class="offer-content">
+                <h2>Special Offer</h2>
+                <h3>Get 25% Off This Week</h3>
+                <p>Use code <strong>WAVE25</strong> at checkout</p>
+                <a href="products.html?sale=true" class="btn primary-btn">Shop Now</a>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Real reviews from happy shoppers</p>
+            </div>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Absolutely love the quality and service. Will definitely shop here again!"</p>
+                    <div class="customer">
+                        <h4>Sarah J.</h4>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Fast shipping and the product exceeded my expectations. Great experience!"</p>
+                    <div class="customer">
+                        <h4>Michael T.</h4>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"The customer service was outstanding when I needed help with my order."</p>
+                    <div class="customer">
+                        <h4>Jessica P.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="newsletter-content">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest updates, offers and special announcements</p>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn primary-btn">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Shop<span>Wave</span></h3>
+                <p>Your ultimate shopping destination for quality products and exceptional service.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping.html">Shipping Policy</a></li>
+                    <li><a href="returns.html">Returns & Refunds</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Shopping Ave, Retail City</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> support@shopwave.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ShopWave. All Rights Reserved.
+                MADE BY CHEERLA SHAMITH
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
